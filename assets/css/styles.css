@@ -66,8 +66,10 @@
   --header-h: 76px;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --dur-s: 180ms;
   --dur-m: 420ms;
+  --dur-l: 720ms;
 }
 
 *,
@@ -137,7 +139,7 @@ blockquote {
 
 .visually-hidden {
   position: absolute;
-    width: 1px;
+  width: 1px;
     height: 1px;
     padding: 0;
     margin: -1px;
@@ -149,7 +151,7 @@ blockquote {
 
 .skip-link {
   position: absolute;
-    left: 1rem;
+  left: 1rem;
     top: -3.5rem;
     background: var(--ink);
     color: var(--paper);
@@ -158,6 +160,7 @@ blockquote {
     z-index: 300;
     transition: top var(--dur-s) var(--ease);
 }
+
 .skip-link:focus {
   top: 1rem;
 }
@@ -196,6 +199,7 @@ blockquote {
   max-width: 46ch;
   line-height: 1.5;
 }
+
 .section--dark .lead {
   color: var(--text-on-dark-soft);
 }
@@ -216,6 +220,7 @@ blockquote {
 .section--alt {
   background: var(--surface-alt);
 }
+
 .section--dark {
   background: var(--surface-dark);
   color: var(--text-on-dark);
@@ -231,21 +236,30 @@ blockquote {
   font-size: var(--step--1);
   border-radius: var(--radius-s);
   border: 1.5px solid transparent;
-  transition: background var(--dur-s) var(--ease), color var(--dur-s) var(--ease), border-color var(--dur-s) var(--ease), transform var(--dur-s) var(--ease);
+  transition: background var(--dur-s) var(--ease), color var(--dur-s) var(--ease), border-color var(--dur-s) var(--ease), transform var(--dur-s) var(--ease), box-shadow var(--dur-s) var(--ease);
   white-space: nowrap;
+  position: relative;
 }
+
 .btn .icon {
   width: 1.1em;
   height: 1.1em;
+  transition: transform var(--dur-s) var(--ease);
 }
+
 .btn--primary {
   background: var(--signal);
   color: var(--white);
   border-color: var(--signal);
 }
+
 .btn--primary:hover {
   background: var(--signal-ink);
   border-color: var(--signal-ink);
+  box-shadow: 0 10px 24px -12px rgba(122, 51, 18, 0.55);
+}
+.btn--primary:hover .icon {
+  transform: translateX(3px);
 }
 .section--dark .btn--outline {
   border-color: var(--border-on-dark);
@@ -256,6 +270,7 @@ blockquote {
   border-color: var(--border);
   color: var(--text);
 }
+
 .btn--outline:hover {
   border-color: var(--signal);
   color: var(--signal-ink);
@@ -283,6 +298,7 @@ blockquote {
   padding-bottom: 0.1em;
   transition: color var(--dur-s) var(--ease), border-color var(--dur-s) var(--ease);
 }
+
 .link:hover {
   color: var(--signal-ink);
 }
@@ -293,7 +309,7 @@ blockquote {
 
 .icon-btn {
   display: inline-flex;
-    align-items: center;
+  align-items: center;
     justify-content: center;
     width: 42px;
     height: 42px;
@@ -301,6 +317,7 @@ blockquote {
   border: 1.5px solid var(--border);
   transition: border-color var(--dur-s) var(--ease), color var(--dur-s) var(--ease);
 }
+
 .icon-btn:hover {
   border-color: var(--signal);
   color: var(--signal-ink);
@@ -316,7 +333,7 @@ blockquote {
    ========================================================================= */
 .site-header {
   position: sticky;
-    top: 0;
+  top: 0;
     z-index: 200;
   background: rgba(247, 244, 238, 0.92);
   backdrop-filter: blur(10px);
@@ -331,19 +348,21 @@ blockquote {
 
 .header__inner {
   display: flex;
-    align-items: center;
+  align-items: center;
     justify-content: space-between;
   height: var(--header-h);
   gap: 1.5rem;
 }
+
 .brand {
   display: flex;
   align-items: center;
   gap: 0.7rem;
 }
+
 .brand__mark {
   display: inline-flex;
-    align-items: center;
+  align-items: center;
     justify-content: center;
     width: 38px;
     height: 38px;
@@ -354,6 +373,11 @@ blockquote {
     font-weight: 700;
     font-size: 0.9rem;
   letter-spacing: 0.02em;
+  transition: transform var(--dur-s) var(--ease-spring);
+  }
+  
+  .brand:hover .brand__mark {
+    transform: rotate(-8deg);
 }
 
 .brand__text {
@@ -390,9 +414,10 @@ blockquote {
   position: relative;
   padding-block: 0.3rem;
 }
+
 .site-nav__list a::after {
   content: "";
-    position: absolute;
+  position: absolute;
     left: 0;
     right: 0;
     bottom: -2px;
@@ -417,9 +442,10 @@ blockquote {
   align-items: center;
   gap: 0.6rem;
 }
+
 .menu-toggle {
   display: none;
-    flex-direction: column;
+  flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 5px;
@@ -428,6 +454,7 @@ blockquote {
     border-radius: 50%;
     border: 1.5px solid var(--border);
 }
+
 .menu-toggle__bars,
 .menu-toggle__bars::before,
 .menu-toggle__bars::after {
@@ -438,6 +465,7 @@ blockquote {
   background: currentColor;
   transition: transform var(--dur-s) var(--ease), opacity var(--dur-s) var(--ease);
 }
+
 .menu-toggle__bars {
   position: relative;
 }
@@ -476,8 +504,33 @@ blockquote {
    Hero
    ========================================================================= */
 .hero {
-  padding-block: clamp(3rem, 7vw, 6rem) clamp(4rem, 8vw, 6rem);
+  position: relative;
+    padding-block: clamp(3rem, 7vw, 5.5rem) clamp(4.5rem, 9vw, 7rem);
+    overflow: clip;
+  }
+  
+  .hero__field {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(60% 55% at 82% 8%, var(--signal-tint) 0%, transparent 72%),
+      radial-gradient(40% 40% at 4% 92%, var(--paper-dim) 0%, transparent 70%);
+    opacity: 0.9;
+  }
+  
+  .hero__grain {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.16;
+    mask-image: linear-gradient(180deg, black, transparent 85%);
 }
+
 .hero__grid {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
@@ -487,17 +540,61 @@ blockquote {
 
 .hero__who {
   font-size: var(--step--1);
-    font-weight: 600;
+  font-weight: 600;
     color: var(--signal-ink);
   margin-bottom: 1rem;
+  display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+  }
+  
+  .hero__who::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--signal);
+    box-shadow: 0 0 0 4px var(--signal-tint);
 }
 
 .hero__title {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--step-4);
-  line-height: 1.04;
+  line-height: 1.06;
   letter-spacing: -0.015em;
+}
+.hero__title-mark {
+  font-style: normal;
+  color: var(--signal-ink);
+  position: relative;
+  white-space: nowrap;
+}
+
+.hero__title-mark::after {
+  content: "";
+  position: absolute;
+  left: -0.05em;
+  right: -0.05em;
+  bottom: 0.06em;
+  height: 0.32em;
+  background: var(--signal-tint);
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-l) var(--ease);
+  transition-delay: 520ms;
+}
+
+.js .hero__title-mark::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__title-mark::after {
+    transition: none;
+    transform: scaleX(1);
+  }
 }
 .h-line {
   display: block;
@@ -508,8 +605,9 @@ blockquote {
   display: block;
   transform: translateY(105%);
 }
+
 .js .h-line span {
-  animation: line-up var(--dur-m) var(--ease) forwards;
+  animation: line-up var(--dur-l) var(--ease) forwards;
   animation-delay: calc(var(--hero-delay, 0) * 1ms);
 }
 
@@ -522,7 +620,7 @@ blockquote {
 }
 
 .hero__title .h-line:nth-child(3) span {
-  --hero-delay: 260;
+  --hero-delay: 280;
 }
 
 @keyframes line-up {
@@ -531,7 +629,30 @@ blockquote {
   }
 }
 
+/* Generic staged hero entrance — used for copy blocks below the title,
+   and for the whole illustration stage. JS toggles .is-in once the page
+   has settled; each element's own transition-delay is set inline via
+   data-hero-delay so the whole hero reads as one orchestrated sequence. */
+[data-hero-el] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--dur-l) var(--ease), transform var(--dur-l) var(--ease);
+}
+
+.js [data-hero-el] {
+  transition-delay: calc(var(--el-delay, 0) * 1ms);
+}
+
+[data-hero-el].is-in {
+  opacity: 1;
+  transform: none;
+}
 @media (prefers-reduced-motion: reduce) {
+  [data-hero-el] {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
   .h-line span {
     transform: none;
     animation: none;
@@ -556,37 +677,47 @@ blockquote {
 .hero__work {
   font-size: 0.9rem;
 }
-.hero__meta {
-  margin-top: 2.4rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 0;
-    font-size: 0.82rem;
-    color: var(--text-soft);
+.hero__proof {
+  margin-top: 2.6rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem 1.6rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--border);
 }
 
-.hero__meta li {
-  padding-right: 1rem;
-  margin-right: 1rem;
-  border-right: 1px solid var(--border);
+.hero__proof-item dt {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: none;
+  color: var(--text-soft);
+  margin-bottom: 0.35rem;
 }
 
-.hero__meta li:last-child {
-  border-right: 0;
-  margin-right: 0;
-  padding-right: 0;
+.hero__proof-item dd {
+  margin: 0;
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.hero__proof-item dd span[data-count] {
+  color: var(--signal-ink);
+  font-family: var(--font-display);
 }
 
 .hero__stage {
   position: relative;
 }
+
 .hero__visual {
   position: relative;
-    aspect-ratio: 1 / 0.92;
+  aspect-ratio: 1 / 0.92;
     border-radius: var(--radius-m);
   background: linear-gradient(155deg, var(--ink) 0%, #23282A 100%);
   overflow: hidden;
 }
+
 .hero__caption {
   margin-top: 0.75rem;
   font-size: 0.76rem;
@@ -596,7 +727,7 @@ blockquote {
 
 .ledger {
   position: absolute;
-    left: 6%;
+  left: 6%;
     top: 8%;
     width: 34%;
     padding: 14px;
@@ -604,6 +735,38 @@ blockquote {
     border-radius: 4px;
     box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
   transform: rotate(-4deg);
+  opacity: 0;
+    transition: opacity var(--dur-l) var(--ease), transform var(--dur-l) var(--ease);
+  }
+  
+  .js .is-in .ledger {
+    opacity: 1;
+    transform: rotate(-4deg) translateY(0);
+    transition-delay: 260ms;
+  }
+  
+  .js .ledger {
+    transform: rotate(-4deg) translateY(14px);
+}
+.ledger__badge,
+.app__badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 0.25em 0.55em;
+  border-radius: 20px;
+  background: var(--paper-dim);
+  color: var(--text-soft);
+}
+
+.app__badge {
+  background: var(--signal-tint);
+  color: var(--signal-ink);
+  top: 10px;
+  right: 10px;
 }
 .ledger__title {
   width: 60%;
@@ -642,24 +805,50 @@ blockquote {
   position: relative;
   background: var(--signal-tint);
 }
+
 .ledger__rows i.is-struck::after {
   content: "";
-    position: absolute;
+  position: absolute;
     inset: 0;
     top: 50%;
     height: 1.5px;
     background: var(--signal);
 }
 
+.hero__arrow {
+  position: absolute;
+  left: 39%;
+  top: 20%;
+  width: 12%;
+  color: var(--text-on-dark-soft);
+  opacity: 0;
+  transition: opacity var(--dur-m) var(--ease);
+}
+
+.js .is-in .hero__arrow {
+  opacity: 1;
+  transition-delay: 520ms;
+}
 .app {
   position: absolute;
-    right: 5%;
+  right: 5%;
     top: 12%;
     width: 62%;
     background: var(--paper);
     border-radius: 6px;
     overflow: hidden;
     box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+    transition: opacity var(--dur-l) var(--ease), transform var(--dur-l) var(--ease);
+}
+.js .app {
+  transform: translate(18px, 10px) scale(0.97);
+}
+
+.js .is-in .app {
+  opacity: 1;
+  transform: none;
+  transition-delay: 420ms;
 }
 .app__bar {
   display: flex;
@@ -716,6 +905,38 @@ blockquote {
   grid-template-columns: 1.4fr 1fr 0.8fr;
   align-items: center;
   gap: 8px;
+  opacity: 0;
+    transform: translateY(6px);
+    transition: opacity var(--dur-m) var(--ease), transform var(--dur-m) var(--ease);
+  }
+  
+  .js .is-in .app__row {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .js .is-in .app__row:nth-child(1) {
+    transition-delay: 560ms;
+  }
+  
+  .js .is-in .app__row:nth-child(2) {
+    transition-delay: 620ms;
+  }
+  
+  .js .is-in .app__row:nth-child(3) {
+    transition-delay: 680ms;
+  }
+  
+  .js .is-in .app__row:nth-child(4) {
+    transition-delay: 740ms;
+  }
+  
+  .js .is-in .app__row:nth-child(5) {
+    transition-delay: 800ms;
+  }
+  
+  .js .is-in .app__row:nth-child(6) {
+    transition-delay: 860ms;
 }
 
 .app__row--head span {
@@ -768,13 +989,24 @@ blockquote {
 
 .phone {
   position: absolute;
-    left: 9%;
+  left: 9%;
     bottom: 6%;
     width: 30%;
     background: var(--paper);
     border-radius: 16px;
     padding: 14px 12px;
     box-shadow: 0 20px 44px -18px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+    transition: opacity var(--dur-l) var(--ease-spring), transform var(--dur-l) var(--ease-spring);
+}
+.js .phone {
+  transform: translateY(22px) scale(0.94);
+}
+
+.js .is-in .phone {
+  opacity: 1;
+  transform: none;
+  transition-delay: 900ms;
 }
 .phone__title {
   font-family: var(--font-display);
@@ -827,6 +1059,44 @@ blockquote {
   border-radius: 5px;
 }
 
+.hero__scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  margin: clamp(2.5rem, 6vw, 4rem) auto 0;
+  color: var(--text-soft);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.hero__scroll .icon {
+  animation: bob 2.2s var(--ease) infinite;
+}
+
+@keyframes bob {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__scroll .icon {
+    animation: none;
+  }
+}
+
+@media (max-width: 920px) {
+  .hero__scroll {
+    display: none;
+  }
+}
 /* =========================================================================
    Trust / facts
    ========================================================================= */
@@ -891,6 +1161,11 @@ blockquote {
 .issue {
   background: var(--surface);
   padding: 1.5rem 1.6rem;
+  transition: background var(--dur-s) var(--ease);
+  }
+  
+  .issue:hover {
+    background: var(--surface-alt);
 }
 
 .issue h3 {
@@ -904,10 +1179,11 @@ blockquote {
   font-size: 0.9rem;
   color: var(--text-soft);
 }
+
 .problem__resolve {
   margin-top: clamp(3rem, 6vw, 5rem);
   display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
     gap: 2rem;
     align-items: center;
     border-top: 1px solid var(--border);
@@ -916,11 +1192,12 @@ blockquote {
 
 .statement {
   font-family: var(--font-display);
-    font-weight: 600;
+  font-weight: 600;
     font-size: var(--step-3);
     line-height: 1.2;
     letter-spacing: -0.01em;
 }
+
 .problem__resolve-side p {
   color: var(--text-soft);
   margin-bottom: 1rem;
@@ -933,18 +1210,23 @@ blockquote {
   display: flex;
   flex-direction: column;
 }
+
 .service {
   display: grid;
-    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
     gap: 2rem;
     padding-block: 2.2rem;
     border-top: 1px solid var(--border);
+  transition: padding-inline-start var(--dur-m) var(--ease);
 }
 
 .service:last-child {
   border-bottom: 1px solid var(--border);
 }
 
+.service:hover {
+  padding-inline-start: 0.6rem;
+}
 .service__title {
   font-family: var(--font-display);
   font-weight: 600;
@@ -990,11 +1272,12 @@ blockquote {
   gap: 0.5rem;
   padding: 1.6rem;
   background: var(--surface);
-  transition: background var(--dur-s) var(--ease);
+  transition: background var(--dur-s) var(--ease), transform var(--dur-s) var(--ease);
 }
 
 .ctas__item:hover {
   background: var(--surface-alt);
+  transform: translateY(-2px);
 }
 
 .ctas__q {
@@ -1023,6 +1306,11 @@ blockquote {
 .sector {
   background: var(--surface-dark);
   padding: 1.6rem;
+  transition: background var(--dur-s) var(--ease);
+  }
+  
+  .sector:hover {
+    background: var(--ink-soft);
 }
 
 .sector h3 {
@@ -1036,9 +1324,10 @@ blockquote {
   font-size: 0.86rem;
   color: var(--text-on-dark-soft);
 }
+
 .sectors__cta {
   margin-top: clamp(2.5rem, 5vw, 4rem);
-    display: flex;
+  display: flex;
     flex-wrap: wrap;
     gap: 1.5rem 2rem;
     align-items: center;
@@ -1046,6 +1335,7 @@ blockquote {
     border-top: 1px solid var(--border-on-dark);
     padding-top: 2.2rem;
 }
+
 .sectors__cta p {
   color: var(--text-on-dark-soft);
   margin-top: 0.5rem;
@@ -1151,6 +1441,11 @@ blockquote {
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--surface-alt);
+  transition: transform var(--dur-m) var(--ease);
+  }
+  
+  .case:hover .frame--browser {
+    transform: translateY(-4px);
 }
 
 .frame--browser .frame__bar {
@@ -1233,6 +1528,11 @@ blockquote {
 .why__item {
   background: var(--surface-alt);
   padding: 1.6rem;
+  transition: background var(--dur-s) var(--ease);
+  }
+  
+  .why__item:hover {
+    background: var(--surface);
 }
 
 .why__item h3 {
@@ -1262,6 +1562,11 @@ blockquote {
   background: var(--surface-dark);
   padding: 1.8rem;
   position: relative;
+  transition: background var(--dur-s) var(--ease);
+  }
+  
+  .step:hover {
+    background: var(--ink-soft);
 }
 
 .step__num {
@@ -1362,9 +1667,10 @@ blockquote {
   gap: clamp(2.5rem, 5vw, 4rem);
   align-items: start;
 }
+
 .portrait__frame {
   aspect-ratio: 4/5;
-    border-radius: var(--radius-m);
+  border-radius: var(--radius-m);
     background: var(--paper-dim);
     border: 1px solid var(--border);
     display: flex;
@@ -1375,49 +1681,62 @@ blockquote {
     text-align: center;
     color: var(--text-soft);
     font-size: 0.85rem;
+  overflow: hidden;
   }
   
-  .portrait__hint {
-    font-size: 0.7rem;
-    opacity: 0.7;
+  .portrait__frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.portrait__hint {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+.about-teaser__copy p {
+  color: var(--text-soft);
+  margin-bottom: 1rem;
+  max-width: 56ch;
+}
+
+.tools {
+  margin-top: 2rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.6rem;
+}
+
+.tools__title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 0.9rem;
+}
+
+.tools__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tools__list li {
+  font-size: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 0.3em 0.8em;
+  color: var(--text-soft);
+  transition: border-color var(--dur-s) var(--ease), color var(--dur-s) var(--ease);
   }
   
-  .about-teaser__copy p {
-    color: var(--text-soft);
-    margin-bottom: 1rem;
-    max-width: 56ch;
-  }
-  
-  .tools {
-    margin-top: 2rem;
-    border-top: 1px solid var(--border);
-    padding-top: 1.6rem;
-  }
-  
-  .tools__title {
-    font-size: 0.85rem;
-    font-weight: 700;
-    margin-bottom: 0.9rem;
-  }
-  
-  .tools__list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  
-  .tools__list li {
-    font-size: 0.8rem;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 0.3em 0.8em;
-    color: var(--text-soft);
-  }
-  
-  .tools__note {
-    margin-top: 0.9rem;
-    font-size: 0.82rem;
-    color: var(--text-soft);
+  .tools__list li:hover {
+    border-color: var(--signal);
+    color: var(--signal-ink);
+}
+
+.tools__note {
+  margin-top: 0.9rem;
+  font-size: 0.82rem;
+  color: var(--text-soft);
 }
 
 /* =========================================================================
@@ -1484,11 +1803,12 @@ blockquote {
   padding: 0.9rem 1rem;
   border: 1px solid var(--border-on-dark);
   border-radius: var(--radius-m);
-  transition: border-color var(--dur-s) var(--ease);
+  transition: border-color var(--dur-s) var(--ease), transform var(--dur-s) var(--ease);
 }
 
 .direct__link:hover {
   border-color: var(--signal);
+  transform: translateX(3px);
 }
 
 .direct__text {
@@ -1558,6 +1878,7 @@ blockquote {
   color: var(--text);
   transition: border-color var(--dur-s) var(--ease);
 }
+
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
@@ -1678,7 +1999,7 @@ blockquote {
    ========================================================================= */
 .wa-float {
   position: fixed;
-    right: 1.25rem;
+  right: 1.25rem;
     bottom: 1.25rem;
     z-index: 250;
     display: flex;
@@ -1689,29 +2010,37 @@ blockquote {
     border-radius: 999px;
     padding: 0.4rem 0.4rem 0.4rem 0.7rem;
     box-shadow: 0 14px 30px -14px rgba(21, 24, 26, 0.35);
+  opacity: 0;
+    transform: translateY(10px) scale(0.96);
+    transition: opacity var(--dur-m) var(--ease), transform var(--dur-m) var(--ease);
   }
   
-  .wa-float[hidden] {
-    display: none;
-  }
-  
-  .wa-float__close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    color: var(--text-soft);
-  }
-  
-  .wa-float__close .icon {
-    width: 15px;
-    height: 15px;
-  }
-  
-  .wa-float__close:hover {
-    background: var(--surface-alt);
+  .wa-float.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+.wa-float[hidden] {
+  display: none;
+}
+
+.wa-float__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: var(--text-soft);
+}
+
+.wa-float__close .icon {
+  width: 15px;
+  height: 15px;
+}
+
+.wa-float__close:hover {
+  background: var(--surface-alt);
 }
 
 /* =========================================================================
@@ -1805,8 +2134,8 @@ blockquote {
    ========================================================================= */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity var(--dur-m) var(--ease), transform var(--dur-m) var(--ease);
+  transform: translateY(22px);
+    transition: opacity var(--dur-l) var(--ease), transform var(--dur-l) var(--ease);
 }
 
 [data-reveal].is-visible {
@@ -1819,9 +2148,10 @@ blockquote {
   overflow: hidden;
   transform: none;
 }
+
 [data-reveal="mask"]::after {
   content: "";
-    position: absolute;
+  position: absolute;
     inset: 0;
     background: var(--surface-alt);
     transform-origin: left;
@@ -1834,7 +2164,7 @@ blockquote {
   
   [data-stagger]>* {
     opacity: 0;
-    transform: translateY(14px);
+  transform: translateY(16px);
     transition: opacity var(--dur-m) var(--ease), transform var(--dur-m) var(--ease);
   }
   
@@ -1844,7 +2174,8 @@ blockquote {
 }
 
 @media (prefers-reduced-motion: reduce) {
-[data-reveal],
+
+  [data-reveal],
   [data-stagger]>*,
   [data-reveal="mask"]::after {
     transition: none !important;
@@ -2011,7 +2342,7 @@ blockquote {
 
 .work-filter button {
   border: 1.5px solid var(--border);
-    border-radius: 999px;
+  border-radius: 999px;
     padding: 0.5em 1.1em;
     font-size: 0.85rem;
     font-weight: 600;

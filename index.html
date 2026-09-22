@@ -208,18 +208,28 @@
   <main id="main" class="home" tabindex="-1">
 
     <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__field" aria-hidden="true">
+        <span class="hero__grain"></span>
+      </div>
       <div class="container hero__grid">
         <div class="hero__copy">
-          <p class="hero__who">Ian Balijawa, software engineer</p>
+          <p class="hero__who" data-hero-el data-hero-delay="0">Software engineer · Kampala, Uganda</p>
           <h1 id="hero-title" class="hero__title">
-            <span class="h-line"><span>Software built</span></span>
-            <span class="h-line"><span>around how your</span></span>
-            <span class="h-line"><span>business actually works.</span></span>
+            <span class="h-line"><span>Your business runs</span></span>
+            <span class="h-line"><span>on paper and chat.</span></span>
+            <span class="h-line"><span>I turn it into <em class="hero__title-mark">software.</em></span></span>
           </h1>
-          <p class="hero__lead">I build websites, mobile apps and custom business systems for companies in Kampala and
-            across Uganda, so your records, bookings and reports stop living in five different places.</p>
-          <div class="hero__actions">
-            <a class="btn btn--primary" href="contact.html">Start a Project</a>
+          <p class="hero__lead" data-hero-el data-hero-delay="340">I build websites, mobile apps and business
+            systems for companies across Uganda &mdash; so your records, bookings and reports stop living in five
+            different places, and start winning you customers.</p>
+          <div class="hero__actions" data-hero-el data-hero-delay="420">
+            <a class="btn btn--primary" href="contact.html">
+              <span>Start a Project</span>
+              <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
             <a class="btn btn--outline"
               href="https://wa.me/256787444814?text=Hello%2C%20I%20found%20your%20website%20and%20would%20like%20to%20discuss%20software%20for%20my%20business."
               data-contact="whatsapp"
@@ -232,22 +242,35 @@
               </svg><span>Chat on WhatsApp</span><span class="visually-hidden"> (opens WhatsApp in a new tab)</span></a>
             <a class="link hero__work" href="work.html">View Our Work</a>
           </div>
-          <ul class="hero__meta" aria-label="At a glance">
-            <li>Kampala, Uganda</li>
-            <li>IT Solutions</li>
-            <li>Websites</li>
-            <li>IT Support</li>
-            <li>Mobile apps</li>
-            <li>Business systems</li>
-          </ul>
-        </div>
-        <div class="hero__stage">
+          <dl class="hero__proof" data-hero-el data-hero-delay="500">
+            <div class="hero__proof-item">
+              <dt>Experience</dt>
+              <dd><span data-count="5" data-suffix="+">5+</span> years in production software</dd>
+            </div>
+            <div class="hero__proof-item">
+              <dt>Background</dt>
+              <dd>Systems built for government-scale reliability</dd>
+            </div>
+            <div class="hero__proof-item">
+              <dt>Coverage</dt>
+              <dd>Web, Android and iOS &mdash; one engineer, one team</dd>
+            </div>
+            </dl>
+            </div>
+            <div class="hero__stage" data-hero-el data-hero-delay="180">
           <div class="hero__visual" aria-hidden="true">
-            <div class="ledger">
+            <div class="ledger" data-hero-piece="ledger">
               <div class="ledger__title"></div>
               <div class="ledger__rows"><i></i><i></i><i class="is-struck"></i><i></i><i></i><i></i><i></i><i></i></div>
+              <span class="ledger__badge">Before</span>
             </div>
-            <div class="app">
+            <div class="hero__arrow" data-hero-piece="arrow" aria-hidden="true">
+              <svg viewBox="0 0 60 24" width="60" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12h50M40 3l12 9-12 9" />
+              </svg>
+            </div>
+            <div class="app" data-hero-piece="app">
               <div class="app__bar"><i></i><i></i><i></i><span>Orders</span></div>
               <div class="app__body">
                 <div class="app__side"><span
@@ -266,8 +289,9 @@
                       class="pill pill--done">Delivered</em></div>
                 </div>
               </div>
+              <span class="app__badge">After</span>
             </div>
-            <div class="phone">
+            <div class="phone" data-hero-piece="phone">
               <p class="phone__title">Book a visit</p>
               <div class="phone__opt is-selected">Haircut</div>
               <div class="phone__opt">Beard trim</div>
@@ -278,6 +302,13 @@
           <p class="hero__caption">Illustrative interface. Not a client project.</p>
         </div>
       </div>
+      <button class="hero__scroll" type="button" id="hero-scroll" aria-label="Scroll to see the problem this solves">
+        <span>See how it works</span>
+        <svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M12 5v14M6 13l6 6 6-6" />
+        </svg>
+      </button>
     </section>
 
     <section class="section section--dark trust" aria-labelledby="trust-title">
@@ -310,7 +341,7 @@
 
     <section class="section problem" id="problem" aria-labelledby="problem-title">
       <div class="container problem__grid">
-        <div class="problem__intro">
+        <div class="problem__intro" data-reveal>
           <h2 id="problem-title" class="h2">Still running important parts of your business manually?</h2>
           <p class="lead">Most business owners I speak to do not have a technology problem. They have a records problem,
             a follow-up problem or a visibility problem. Software is what fixes it.</p>
@@ -362,12 +393,12 @@
 
     <section class="section section--alt services" id="services" aria-labelledby="services-title">
       <div class="container">
-        <div class="section__head">
+        <div class="section__head" data-reveal>
           <h2 id="services-title" class="h2">Software for the parts of your business that need it.</h2>
           <p class="lead">Six kinds of work. Each one starts with a business problem, not a technology.</p>
         </div>
         <div class="service-list">
-          <article class="service">
+          <article class="service" data-reveal>
             <h3 class="service__title">Business Websites</h3>
             <p class="service__desc">A professional website that shows customers you are real, tells them what you do
               and makes it easy to contact you.</p>
@@ -377,7 +408,7 @@
               <a class="link" href="services.html#business-websites">More about business websites</a>
             </div>
           </article>
-          <article class="service">
+          <article class="service" data-reveal>
             <h3 class="service__title">Business Management Systems</h3>
             <p class="service__desc">One system for your customers, sales, stock, staff and expenses, built around the
               way your business actually runs.</p>
@@ -387,7 +418,7 @@
               <a class="link" href="services.html#business-systems">More about business management systems</a>
             </div>
           </article>
-          <article class="service">
+          <article class="service" data-reveal>
             <h3 class="service__title">Mobile Applications</h3>
             <p class="service__desc">Android and iOS apps built around a real need, for your customers or for the people
               doing the work in the field.</p>
@@ -397,7 +428,7 @@
               <a class="link" href="services.html#mobile-apps">More about mobile applications</a>
             </div>
           </article>
-          <article class="service">
+          <article class="service" data-reveal>
             <h3 class="service__title">Custom Web Applications</h3>
             <p class="service__desc">Purpose-built portals, dashboards and internal tools for processes that
               off-the-shelf software does not fit.</p>
@@ -407,7 +438,7 @@
               <a class="link" href="services.html#web-apps">More about custom web applications</a>
             </div>
           </article>
-          <article class="service">
+          <article class="service" data-reveal>
             <h3 class="service__title">Booking & Appointment Systems</h3>
             <p class="service__desc">Let customers book online, and give your staff one calendar that everyone trusts.
             </p>
@@ -417,7 +448,7 @@
               <a class="link" href="services.html#booking-systems">More about booking & appointment systems</a>
             </div>
           </article>
-          <article class="service">
+          <article class="service" data-reveal>
             <h3 class="service__title">Automation & Integrations</h3>
             <p class="service__desc">Connect the tools you already use, remove repeated typing and keep your information
               in one place.</p>
@@ -441,7 +472,7 @@
 
     <section class="section section--dark sectors" id="solutions" aria-labelledby="solutions-title">
       <div class="container">
-        <div class="section__head">
+        <div class="section__head" data-reveal>
           <h2 id="solutions-title" class="h2">Built for businesses like yours.</h2>
           <p class="lead">Find your kind of business below. The details differ, but the goal is the same: less admin,
             better records and happier customers.</p>
@@ -496,7 +527,7 @@
             <p>One system to replace the five spreadsheets you use today.</p>
           </li>
         </ul>
-        <div class="sectors__cta">
+        <div class="sectors__cta" data-reveal>
           <div>
             <h3 class="h3">Not sure what software your business needs?</h3>
             <p>Tell me how your business works today. We will work out together what can be improved or automated.</p>
@@ -508,7 +539,7 @@
 
     <section class="section work" id="work" aria-labelledby="work-title">
       <div class="container">
-        <div class="section__head">
+        <div class="section__head" data-reveal>
           <h2 id="work-title" class="h2">Selected work.</h2>
           <p class="lead">Much of my most substantial work is for government and institutional organisations, so it is
             described in general terms. Ask me and I will explain what I can.</p>
@@ -531,7 +562,7 @@
                 </div>
               </div>
             </div>
-            <div class="case__body">
+            <div class="case__body" data-reveal>
               <ul class="tags">
                 <li>Regulatory authority</li>
                 <li>Web and mobile</li>
@@ -565,7 +596,7 @@
                 </div>
               </div>
             </div>
-            <div class="case__body">
+            <div class="case__body" data-reveal>
               <ul class="tags">
                 <li>Government</li>
                 <li>Web application</li>
@@ -597,7 +628,7 @@
                 </div>
               </div>
             </div>
-            <div class="case__body">
+            <div class="case__body" data-reveal>
               <ul class="tags">
                 <li>Government</li>
                 <li>Web application</li>
@@ -625,7 +656,7 @@
 
     <section class="section section--alt why" aria-labelledby="why-title">
       <div class="container why__grid">
-        <div class="why__intro">
+        <div class="why__intro" data-reveal>
           <h2 id="why-title" class="h2">Why businesses work with me.</h2>
           <p class="lead">You are hiring an engineer who will listen first, build carefully and still be around after
             launch.</p>
@@ -664,7 +695,7 @@
 
     <section class="section section--dark process" id="process" aria-labelledby="process-title">
       <div class="container">
-        <div class="section__head">
+        <div class="section__head" data-reveal>
           <h2 id="process-title" class="h2">How a project runs.</h2>
           <p class="lead">Six steps, each with something you can see and approve.</p>
         </div>
@@ -705,7 +736,7 @@
 
     <section class="section testimonials" aria-labelledby="quotes-title">
       <div class="container">
-        <div class="section__head">
+        <div class="section__head" data-reveal>
           <h2 id="quotes-title" class="h2">What clients say.</h2>
         </div>
         <!-- Replace these placeholders with real, approved testimonials. Delete this section if none are available yet. -->
@@ -741,7 +772,7 @@
             </p>
           </div>
         </figure>
-        <div class="about-teaser__copy">
+        <div class="about-teaser__copy" data-reveal>
           <h2 id="about-title" class="h2">The engineer behind the work.</h2>
           <p>I am Ian Balijawa, a software engineer based in Kampala. For more than five years I have built web
             applications, mobile apps, APIs and databases for organisations in fintech, telecom and government.</p>
@@ -773,7 +804,7 @@
 
     <section class="section section--dark contact" id="contact" aria-labelledby="contact-title">
       <div class="container contact__grid">
-        <div class="contact__intro">
+        <div class="contact__intro" data-reveal>
           <h2 id="contact-title" class="h2">Have a business problem that software could solve?</h2>
           <p class="lead">Describe it in your own words. Rough is fine. I will reply with questions, a suggested
             approach, or an honest answer if software is not what you need.</p>
@@ -822,7 +853,7 @@
           </ul>
           <p class="contact__where">Based in Kampala, Uganda. Working with businesses across the country.</p>
         </div>
-        <div class="form-card" id="contact-form">
+        <div class="form-card" id="contact-form" data-reveal>
           <form class="form" id="inquiry-form" novalidate>
             <div class="form__summary" id="f-summary" role="alert" tabindex="-1" hidden></div>
             <p class="form__note">All fields are required unless marked optional.</p>
@@ -960,10 +991,10 @@
           <div class="form__fallback" id="f-fallback" role="alert" tabindex="-1" hidden>
             <h3>The form is not connected yet.</h3>
             <p>Your details were not sent anywhere. You can send the same message on WhatsApp instead.</p>
-            <a class="btn btn--primary" id="f-fallback-link" href="https://wa.me/256787444814"
-              data-contact="whatsapp" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24"
-                width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"
-                stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <a class="btn btn--primary" id="f-fallback-link" href="https://wa.me/256787444814" data-contact="whatsapp"
+              target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" width="24" height="24" fill="none"
+                stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+                focusable="false">
                 <path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z" />
                 <path d="M9.2 8.6c0 3.4 2.8 6.2 6.2 6.2l.9-1.5-2-.9-.9.9c-.9-.4-1.8-1.3-2.2-2.2l.9-.9-.9-2-1.5.9z" />
               </svg><span>Continue on WhatsApp</span><span class="visually-hidden"> (opens in a new tab)</span></a>
@@ -1027,17 +1058,16 @@
                 data-wa-message="Hello, I found your website and would like to discuss software for my business."
                 target="_blank" rel="noopener noreferrer">WhatsApp<span class="visually-hidden"> (opens in a new
                   tab)</span></a></li>
-            <li><a href="tel:256787444814" data-contact="phone"><span data-contact-text="phone">256787444814</span></a></li>
+            <li><a href="tel:256787444814" data-contact="phone"><span data-contact-text="phone">256787444814</span></a>
+            </li>
             <li><a href="mailto:ianbalijawa16@gmail.com" data-contact="email"><span
                   data-contact-text="email">ianbalijawa16@gmail.com</span></a></li>
             <li><a href="https://www.linkedin.com/in/ian-balijawa-10369a181/" data-social="linkedin" target="_blank"
-                rel="noopener noreferrer">LinkedIn<span
-                  class="visually-hidden"> (opens in a new tab)</span></a></li>
+                rel="noopener noreferrer">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
             <li><a href="https://www.instagram.com/ianbalijawa/" data-social="instagram" target="_blank"
                 rel="noopener noreferrer">Instagram<span class="visually-hidden"> (opens in a new tab)</span></a></li>
             <li><a href="https://www.facebook.com/ian.balijawa" data-social="facebook" target="_blank"
-                rel="noopener noreferrer">Facebook<span
-                  class="visually-hidden"> (opens in a new tab)</span></a></li>
+                rel="noopener noreferrer">Facebook<span class="visually-hidden"> (opens in a new tab)</span></a></li>
           </ul>
         </div>
       </div>

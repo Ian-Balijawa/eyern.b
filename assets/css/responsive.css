@@ -2,20 +2,24 @@
 
 @media (max-width: 1080px) {
   .sector-grid {
-      grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     }
-  
+    
     .why__list {
       grid-template-columns: 1fr;
     }
-  
+    
     .steps {
       grid-template-columns: repeat(2, 1fr);
     }
-  
+    
     .value-grid {
       grid-template-columns: repeat(2, 1fr);
     }
+.hero__proof {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+}
 }
 
 @media (max-width: 920px) {
@@ -27,53 +31,56 @@
   .contact__grid,
   .why__grid,
   .case-full__grid {
-      grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
     }
-  
+    
     .hero__stage {
       order: -1;
     }
-  
+    
     .hero__visual {
       max-width: 30rem;
       margin-inline: auto;
     }
-  
+    
     .hero__caption {
       text-align: left;
     }
-  
+    
     .case,
     .case--flip {
       grid-template-columns: 1fr;
     }
-  
+    
     .case--flip .case__media,
     .case--flip .case__body {
       order: initial;
     }
-  
+    
     .facts {
       grid-template-columns: 1fr 1fr;
     }
-  
+    
     .issues {
       grid-template-columns: 1fr;
     }
-  
+    
     .sector-grid {
       grid-template-columns: repeat(2, 1fr);
     }
-  
+    
     .ctas {
       grid-template-columns: 1fr;
     }
-  
+    
     .service {
       grid-template-columns: 1fr;
       gap: 1rem;
     }
 
+    .service:hover {
+      padding-inline-start: 0;
+    }
     .form__grid {
       grid-template-columns: 1fr;
     }
@@ -85,16 +92,19 @@
     .problem__resolve {
       grid-template-columns: 1fr;
     }
+.hero__proof {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
 }
 
 @media (max-width: 760px) {
   :root {
-      --header-h: 68px;
+    --header-h: 68px;
     }
 
   .site-nav {
     position: fixed;
-      top: var(--header-h);
+    top: var(--header-h);
       left: 0;
       right: 0;
       z-index: 190;
@@ -113,98 +123,107 @@
     transition: opacity var(--dur-s) var(--ease), transform var(--dur-s) var(--ease);
     overflow-y: auto;
   }
-.site-nav.is-open {
-  opacity: 1;
-  transform: none;
-  pointer-events: auto;
-}
 
-.site-nav__list {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.1rem;
-  font-size: 1.15rem;
-}
+    .site-nav.is-open {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
 
-.site-nav__cta {
-  width: 100%;
-  justify-content: center;
-}
+    .site-nav__list {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.1rem;
+      font-size: 1.15rem;
+    }
 
-.header__actions {
-  display: flex;
-}
+    .site-nav__cta {
+      width: 100%;
+      justify-content: center;
+    }
 
-.menu-toggle {
-  display: flex;
-}
+    .header__actions {
+      display: flex;
+    }
 
-.brand__role {
-  display: none;
-}
+    .menu-toggle {
+      display: flex;
+    }
 
-.value-grid {
-  grid-template-columns: 1fr;
-}
+    .brand__role {
+      display: none;
+    }
 
-.sector-grid {
-  grid-template-columns: 1fr;
-}
+    .value-grid {
+      grid-template-columns: 1fr;
+    }
 
-.quotes {
-  grid-template-columns: 1fr;
-}
+    .sector-grid {
+      grid-template-columns: 1fr;
+    }
 
-.timeline__item {
-  grid-template-columns: 1fr;
-  gap: 0.4rem;
-}
+    .quotes {
+      grid-template-columns: 1fr;
+    }
 
-.frame-duo {
-  grid-template-columns: 1fr;
-}
+    .timeline__item {
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+    }
 
-.frame-duo .frame--phone {
-  max-width: 12rem;
-  margin-inline: auto;
-}
+    .frame-duo {
+      grid-template-columns: 1fr;
+    }
 
-.work-filter {
-  gap: 0.5rem;
-}
+    .frame-duo .frame--phone {
+      max-width: 12rem;
+      margin-inline: auto;
+    }
+
+    .work-filter {
+      gap: 0.5rem;
+    }
 
     .cta-band__inner {
       flex-direction: column;
       align-items: flex-start;
     }
+.hero__proof {
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.hero__arrow {
+  display: none;
+}
 }
 
 @media (max-width: 560px) {
   .facts {
-      grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
     }
-  
+    
     .hero__actions {
       flex-direction: column;
       align-items: stretch;
     }
-  
+    
     .hero__actions .btn,
     .hero__actions .wa-float,
     .hero__actions a.link {
       width: 100%;
       justify-content: center;
     }
-  
+    
     .hero__work {
       text-align: center;
     }
-  
+    
     .footer__grid {
       grid-template-columns: 1fr 1fr;
       gap: 2rem 1.5rem;
     }
-  
+    
     .footer__about {
       grid-column: 1 / -1;
     }
@@ -212,6 +231,6 @@
 
 @media (max-width: 420px) {
   .footer__grid {
-      grid-template-columns: 1fr;
+    grid-template-columns: 1fr;
     }
 }

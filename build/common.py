@@ -42,7 +42,7 @@ def icon(name, cls="icon"):
 
 
 def wa_link(label="Chat on WhatsApp", message=DEFAULT_WA, cls="btn btn--outline", show_icon=True):
-    href = f"https://wa.me/[WHATSAPP_NUMBER]?text={quote(message)}"
+    href = f"https://wa.me/256787444814?text={quote(message)}"
     ic = icon("whatsapp") if show_icon else ""
     return (
         f'<a class="{cls}" href="{href}" data-contact="whatsapp" data-wa-message="{message}" '
@@ -81,15 +81,15 @@ PERSON = {
     "name": SITE_NAME,
     "jobTitle": "Software Engineer",
     "url": f"{BASE_URL}/",
-    "email": "[EMAIL_ADDRESS]",
-    "telephone": "[PHONE_NUMBER]",
+    "email": "ianbalijawa16@gmail.com",
+    "telephone": "256787444814",
     "address": {"@type": "PostalAddress", "addressLocality": "Kampala", "addressCountry": "UG"},
     "alumniOf": {"@type": "CollegeOrUniversity", "name": "Makerere University"},
     "knowsAbout": [
         "Web application development", "Mobile application development", "React Native",
         "TypeScript", "APIs", "Databases", "Business systems",
     ],
-    "sameAs": ["[LINKEDIN_URL]"],
+    "sameAs": ["https://www.linkedin.com/in/ian-balijawa-10369a181/"],
 }
 
 BUSINESS = {
@@ -102,8 +102,8 @@ BUSINESS = {
         "Websites, mobile applications and custom business systems for businesses "
         "in Kampala and across Uganda."
     ),
-    "telephone": "[PHONE_NUMBER]",
-    "email": "[EMAIL_ADDRESS]",
+    "telephone": "256787444814",
+    "email": "ianbalijawa16@gmail.com",
     "address": {"@type": "PostalAddress", "addressLocality": "Kampala", "addressCountry": "UG"},
     "areaServed": [{"@type": "City", "name": "Kampala"}, {"@type": "Country", "name": "Uganda"}],
     "founder": {"@id": f"{BASE_URL}/#person"},
@@ -192,7 +192,7 @@ def header(current="", home=False):
       <a class="btn btn--primary btn--sm site-nav__cta" href="contact.html">Start a Project</a>
     </nav>
     <div class="header__actions">
-      <a class="icon-btn" href="https://wa.me/[WHATSAPP_NUMBER]?text={quote(DEFAULT_WA)}" data-contact="whatsapp" data-wa-message="{DEFAULT_WA}" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp (opens in a new tab)">{icon("whatsapp")}</a>
+      <a class="icon-btn" href="https://wa.me/256787444814?text={quote(DEFAULT_WA)}" data-contact="whatsapp" data-wa-message="{DEFAULT_WA}" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp (opens in a new tab)">{icon("whatsapp")}</a>
       <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="site-nav">
         <span class="menu-toggle__label">Menu</span>
         <span class="menu-toggle__bars" aria-hidden="true"></span>
@@ -239,12 +239,12 @@ def footer():
       <div class="footer__col">
         <h2 class="footer__title">Contact</h2>
         <ul>
-          <li><a href="https://wa.me/[WHATSAPP_NUMBER]?text={quote(DEFAULT_WA)}" data-contact="whatsapp" data-wa-message="{DEFAULT_WA}" target="_blank" rel="noopener noreferrer">WhatsApp<span class="visually-hidden"> (opens in a new tab)</span></a></li>
-          <li><a href="tel:[PHONE_NUMBER]" data-contact="phone"><span data-contact-text="phone">[PHONE_NUMBER]</span></a></li>
-          <li><a href="mailto:[EMAIL_ADDRESS]" data-contact="email"><span data-contact-text="email">[EMAIL_ADDRESS]</span></a></li>
-          <li><a href="[LINKEDIN_URL]" data-social="linkedin" target="_blank" rel="noopener noreferrer">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
-          <li><a href="[INSTAGRAM_URL]" data-social="instagram" target="_blank" rel="noopener noreferrer">Instagram<span class="visually-hidden"> (opens in a new tab)</span></a></li>
-          <li><a href="[FACEBOOK_URL]" data-social="facebook" target="_blank" rel="noopener noreferrer">Facebook<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          <li><a href="https://wa.me/256787444814?text={quote(DEFAULT_WA)}" data-contact="whatsapp" data-wa-message="{DEFAULT_WA}" target="_blank" rel="noopener noreferrer">WhatsApp<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          <li><a href="tel:256787444814" data-contact="phone"><span data-contact-text="phone">256787444814</span></a></li>
+          <li><a href="mailto:ianbalijawa16@gmail.com" data-contact="email"><span data-contact-text="email">ianbalijawa16@gmail.com</span></a></li>
+          <li><a href="https://www.linkedin.com/in/ian-balijawa-10369a181/" data-social="linkedin" target="_blank" rel="noopener noreferrer">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          <li><a href="https://www.instagram.com/ianbalijawa/" data-social="instagram" target="_blank" rel="noopener noreferrer">Instagram<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          <li><a href="https://www.facebook.com/ian.balijawa" data-social="facebook" target="_blank" rel="noopener noreferrer">Facebook<span class="visually-hidden"> (opens in a new tab)</span></a></li>
         </ul>
       </div>
     </div>
@@ -341,29 +341,29 @@ def contact_form(prefix="f"):
 <div class="form__fallback" id="{p}-fallback" role="alert" tabindex="-1" hidden>
   <h3>The form is not connected yet.</h3>
   <p>Your details were not sent anywhere. You can send the same message on WhatsApp instead.</p>
-  <a class="btn btn--primary" id="{p}-fallback-link" href="https://wa.me/[WHATSAPP_NUMBER]" data-contact="whatsapp" target="_blank" rel="noopener noreferrer">{icon("whatsapp")}<span>Continue on WhatsApp</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+  <a class="btn btn--primary" id="{p}-fallback-link" href="https://wa.me/256787444814" data-contact="whatsapp" target="_blank" rel="noopener noreferrer">{icon("whatsapp")}<span>Continue on WhatsApp</span><span class="visually-hidden"> (opens in a new tab)</span></a>
 </div>"""
 
 
 def direct_options():
     return f"""<ul class="direct">
   <li>
-    <a class="direct__link" href="https://wa.me/[WHATSAPP_NUMBER]?text={quote(DEFAULT_WA)}" data-contact="whatsapp" data-wa-message="{DEFAULT_WA}" target="_blank" rel="noopener noreferrer">
+    <a class="direct__link" href="https://wa.me/256787444814?text={quote(DEFAULT_WA)}" data-contact="whatsapp" data-wa-message="{DEFAULT_WA}" target="_blank" rel="noopener noreferrer">
       {icon("whatsapp")}
-      <span class="direct__text"><span class="direct__label">WhatsApp</span><span class="direct__detail" data-contact-text="whatsapp">[WHATSAPP_NUMBER]</span></span>
+      <span class="direct__text"><span class="direct__label">WhatsApp</span><span class="direct__detail" data-contact-text="whatsapp">256787444814</span></span>
       <span class="visually-hidden">(opens in a new tab)</span>
     </a>
   </li>
   <li>
-    <a class="direct__link" href="tel:[PHONE_NUMBER]" data-contact="phone">
+    <a class="direct__link" href="tel:256787444814" data-contact="phone">
       {icon("phone")}
-      <span class="direct__text"><span class="direct__label">Call</span><span class="direct__detail" data-contact-text="phone">[PHONE_NUMBER]</span></span>
+      <span class="direct__text"><span class="direct__label">Call</span><span class="direct__detail" data-contact-text="phone">256787444814</span></span>
     </a>
   </li>
   <li>
-    <a class="direct__link" href="mailto:[EMAIL_ADDRESS]" data-contact="email">
+    <a class="direct__link" href="mailto:ianbalijawa16@gmail.com" data-contact="email">
       {icon("mail")}
-      <span class="direct__text"><span class="direct__label">Email</span><span class="direct__detail" data-contact-text="email">[EMAIL_ADDRESS]</span></span>
+      <span class="direct__text"><span class="direct__label">Email</span><span class="direct__detail" data-contact-text="email">ianbalijawa16@gmail.com</span></span>
     </a>
   </li>
 </ul>"""

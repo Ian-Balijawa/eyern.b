@@ -38,7 +38,7 @@ Nothing was invented — these are intentionally left for you to fill in.
 | `[EMAIL_ADDRESS]` | Footer, contact page, privacy policy, `assets/js/main.js` (`CONTACT.email`) | Your email address |
 | `[DOMAIN]` | `robots.txt`, `sitemap.xml`, every page's canonical/Open Graph tags | Your live domain, e.g. `ianbalijawa.com` |
 | `[LINKEDIN_URL]` | Footer, JSON-LD `sameAs` | Your LinkedIn profile URL |
-| `[INSTAGRAM_URL]`, `[FACEBOOK_URL]` | Footer | Your social profile URLs, or delete the links if you don't use them |
+| `[INSTAGRAM_URL]`, `https://www.facebook.com/ian.balijawa` | Footer | Your social profile URLs, or delete the links if you don't use them |
 | `[FORM_ENDPOINT]` | `assets/js/form.js` (top of file) | Your form provider's endpoint — see below |
 | `[SCREENSHOT_1]` … `[SCREENSHOT_3]` and `[SCREENSHOT_*_MOBILE]` | `work.html`, and the work preview on `index.html` | Real, approved screenshots of finished projects — see "Adding real project screenshots" |
 | `[CLIENT_NAME]`, `[BUSINESS_NAME]`, `[POSITION]`, `[AUTHENTIC_TESTIMONIAL]`, `[CLIENT_PHOTO]` | Testimonials section on `index.html` | Real testimonials, once you have them to publish. No testimonials were invented — delete the section entirely if you don't have any yet |

@@ -460,7 +460,7 @@ def home_body():
 <section class="section section--alt about-teaser" aria-labelledby="about-title">
   <div class="container about-teaser__grid">
     <figure class="portrait" data-reveal="mask">
-      <div class="portrait__frame"><p>[PORTRAIT_PHOTO]</p><p class="portrait__hint">assets/images/ian-balijawa.webp</p></div>
+      <div class="portrait__frame"><p>[PORTRAIT_PHOTO]</p><p class="portrait__hint">assets/images/ian-balijawa.png</p></div>
     </figure>
     <div class="about-teaser__copy">
       <h2 id="about-title" class="h2">The engineer behind the work.</h2>

@@ -257,10 +257,10 @@ def privacy_body():
       <p>This website does not set marketing or tracking cookies by default. If analytics are added later, this section will be updated to name the tool and what it collects.</p>
 
       <h2>Your rights</h2>
-      <p>You can ask what information is held about you, ask for it to be corrected, or ask for it to be deleted, by contacting [EMAIL_ADDRESS].</p>
+      <p>You can ask what information is held about you, ask for it to be corrected, or ask for it to be deleted, by contacting ianbalijawa16@gmail.com.</p>
 
       <h2>Contact</h2>
-      <p>Questions about this policy can be sent to [EMAIL_ADDRESS] or [PHONE_NUMBER].</p>
+      <p>Questions about this policy can be sent to ianbalijawa16@gmail.com or 256787444814.</p>
     </div>
   </div>
 </section>
@@ -292,7 +292,7 @@ def terms_body():
       <p>These terms are governed by the laws of the Republic of Uganda.</p>
 
       <h2>Contact</h2>
-      <p>Questions about these terms can be sent to [EMAIL_ADDRESS].</p>
+      <p>Questions about these terms can be sent to ianbalijawa16@gmail.com.</p>
     </div>
   </div>
 </section>

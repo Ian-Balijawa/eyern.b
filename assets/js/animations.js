@@ -1,209 +1,137 @@
-/* =========================================================================
-   Ian Balijawa — site interactions & scroll animations
-   Handles: fade/mask reveals, number counters, header scroll state,
-   mobile nav, hero entrance sequence, and the WhatsApp float.
-   Everything respects prefers-reduced-motion.
-   ========================================================================= */
-(function () {
-  "use strict";
+/* animations.js: hero entrance, scroll reveals, counters, parallax, progress bar */
+(() => {
+  'use strict';
 
-  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
-  /* ------------------------------------------------------------------
-   * Fade / mask reveals on scroll into view
-   * ---------------------------------------------------------------- */
-  var revealTargets = document.querySelectorAll("[data-reveal], [data-stagger]");
-  if (revealTargets.length && !reduceMotion && "IntersectionObserver" in window) {
-    var io = new IntersectionObserver(
-      function (entries, obs) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            var el = entry.target;
-            if (el.hasAttribute("data-stagger")) {
-              Array.prototype.slice.call(el.children).forEach(function (child, i) {
-                child.style.transitionDelay = (i * 70) + "ms";
-              });
-            }
-            el.classList.add("is-visible");
-            obs.unobserve(el);
-          }
-        });
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
-    );
-    revealTargets.forEach(function (el) {
-      io.observe(el);
-    });
-  } else {
-    revealTargets.forEach(function (el) {
-      el.classList.add("is-visible");
+  /* ---------- hero entrance ---------- */
+  const heroEls = $$('[data-hero-el]');
+  heroEls.forEach((el) => el.style.setProperty('--el-delay', el.dataset.heroDelay || 0));
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() => heroEls.forEach((el) => el.classList.add('is-in')))
+  );
+
+  /* ---------- hero scroll button ---------- */
+  const heroBtn = document.getElementById('hero-scroll');
+  if (heroBtn) {
+    heroBtn.addEventListener('click', () => {
+      const t = document.getElementById('trust') || document.getElementById('problem');
+      if (t) t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
     });
   }
 
-  /* ------------------------------------------------------------------
-   * Number counters, e.g. <span data-count="5" data-suffix="+">
-   * ---------------------------------------------------------------- */
-  var counters = document.querySelectorAll("[data-count]");
-  if (counters.length) {
-    var animateCount = function (el) {
-      if (el.dataset.counted === "true") return;
-      el.dataset.counted = "true";
-
-      var target = parseFloat(el.getAttribute("data-count"), 10);
-      var suffix = el.getAttribute("data-suffix") || "";
-      if (reduceMotion || isNaN(target)) {
-        el.textContent = target + suffix;
-        return;
-      }
-      var duration = 900;
-      var start = null;
-      var step = function (ts) {
-        if (start === null) start = ts;
-        var progress = Math.min((ts - start) / duration, 1);
-        var eased = 1 - Math.pow(1 - progress, 3);
-        var value = Math.round(target * eased * 10) / 10;
-        el.textContent = (value % 1 === 0 ? value.toFixed(0) : value.toFixed(1)) + suffix;
-        if (progress < 1) window.requestAnimationFrame(step);
-      };
-      window.requestAnimationFrame(step);
+  /* ---------- counters ---------- */
+  const runCount = (el) => {
+    const end = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    if (reduce || isNaN(end)) { el.textContent = end + suffix; return; }
+    const start = performance.now();
+    const dur = 1400;
+    const tick = (now) => {
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(end * eased) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
     };
+    requestAnimationFrame(tick);
+  };
 
-    if ("IntersectionObserver" in window) {
-      var countIo = new IntersectionObserver(
-        function (entries, obs) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              animateCount(entry.target);
-              obs.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.6 }
-      );
-      counters.forEach(function (el) {
-        countIo.observe(el);
-      });
-    } else {
-      counters.forEach(animateCount);
-    }
-  }
-
-  /* ------------------------------------------------------------------
-   * Header: shadow + border once the page has scrolled past the top.
-   * ---------------------------------------------------------------- */
-  var header = document.getElementById("site-header");
-  if (header) {
-    var setHeaderState = function () {
-      header.classList.toggle("is-scrolled", window.scrollY > 8);
-    };
-    setHeaderState();
-    window.addEventListener("scroll", setHeaderState, { passive: true });
-  }
-
-  /* ------------------------------------------------------------------
-   * Mobile nav toggle.
-   * ---------------------------------------------------------------- */
-  var menuToggle = document.getElementById("menu-toggle");
-  var siteNav = document.getElementById("site-nav");
-  if (menuToggle && siteNav) {
-    menuToggle.addEventListener("click", function () {
-      var isOpen = siteNav.classList.toggle("is-open");
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
+  /* ---------- scroll reveals ---------- */
+  const targets = $$('[data-reveal], [data-stagger]');
+  $$('[data-stagger]').forEach((group) => {
+    Array.from(group.children).forEach((child, i) => {
+      if (!child.style.getPropertyValue('--i')) child.style.setProperty('--i', i);
     });
-    siteNav.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        siteNav.classList.remove("is-open");
-        menuToggle.setAttribute("aria-expanded", "false");
-      });
-    });
-  }
-
-  /* ------------------------------------------------------------------
-   * Year stamp in the footer.
-   * ---------------------------------------------------------------- */
-  document.querySelectorAll("[data-year]").forEach(function (el) {
-    el.textContent = String(new Date().getFullYear());
   });
 
-  /* ------------------------------------------------------------------
-   * Hero entrance sequence. Each [data-hero-el] carries a
-   * data-hero-delay (ms) written into --el-delay so the CSS
-   * transition-delay picks it up — timing lives in the markup,
-   * the actual motion lives in CSS.
-   * ---------------------------------------------------------------- */
-  var heroEls = document.querySelectorAll("[data-hero-el]");
-  if (heroEls.length) {
-    heroEls.forEach(function (el) {
-      var delay = el.getAttribute("data-hero-delay") || "0";
-      el.style.setProperty("--el-delay", delay);
-    });
-
-    if (reduceMotion) {
-      heroEls.forEach(function (el) { el.classList.add("is-in"); });
-    } else {
-      // Let the initial (hidden) state paint first, then flip the
-      // class so the CSS transitions actually run.
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          heroEls.forEach(function (el) { el.classList.add("is-in"); });
+  if (!('IntersectionObserver' in window) || reduce) {
+    targets.forEach((el) => el.classList.add('is-visible'));
+    $$('[data-count]').forEach(runCount);
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          el.classList.add('is-visible');
+          $$('[data-count]', el).forEach(runCount);
+          io.unobserve(el);
         });
-      });
-    }
-  }
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
+    );
+    targets.forEach((el) => io.observe(el));
 
-  /* ------------------------------------------------------------------
-   * Scroll to the "problem" section from the hero's scroll cue.
-   * ---------------------------------------------------------------- */
-  var heroScroll = document.getElementById("hero-scroll");
-  if (heroScroll) {
-    heroScroll.addEventListener("click", function () {
-      var target = document.getElementById("problem");
-      if (target) {
-        target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
-      }
+    // counters that live outside a reveal group (hero proof)
+    const co = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { runCount(e.target); co.unobserve(e.target); }
+      });
+    }, { threshold: 0.6 });
+    $$('[data-count]').forEach((el) => {
+      if (!el.closest('[data-reveal], [data-stagger]')) co.observe(el);
     });
   }
 
-  /* ------------------------------------------------------------------
-   * WhatsApp float: appears once the hero has scrolled out of view,
-   * and can be dismissed for the rest of the session.
-   * ---------------------------------------------------------------- */
-  var waFloat = document.getElementById("wa-float");
-  var waFloatClose = document.getElementById("wa-float-close");
-  var hero = document.querySelector(".hero");
+  /* ---------- scroll progress bar + hero blob parallax ---------- */
+  const bar = document.createElement('div');
+  bar.className = 'scroll-progress';
+  bar.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(bar);
+  const hero = document.querySelector('.hero');
+  let ticking = false;
 
-  if (waFloat) {
-    var dismissed = false;
-    try {
-      dismissed = sessionStorage.getItem("wa-float-dismissed") === "true";
-    } catch (e) { /* storage unavailable — treat as not dismissed */ }
-
-    if (!dismissed) {
-      if (hero && "IntersectionObserver" in window) {
-        var heroObserver = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (entry) {
-              waFloat.hidden = false;
-              waFloat.classList.toggle("is-visible", !entry.isIntersecting);
-            });
-          },
-          { threshold: 0 }
-        );
-        heroObserver.observe(hero);
-      } else {
-        waFloat.hidden = false;
-        waFloat.classList.add("is-visible");
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.setProperty('--p', max > 0 ? (window.scrollY / max).toFixed(4) : 0);
+      if (hero && !reduce && window.scrollY < window.innerHeight * 1.2) {
+        hero.style.setProperty('--sy', (window.scrollY * 0.18).toFixed(1));
       }
-    }
+      ticking = false;
+    });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-    if (waFloatClose) {
-      waFloatClose.addEventListener("click", function () {
-        waFloat.classList.remove("is-visible");
-        window.setTimeout(function () { waFloat.hidden = true; }, 200);
-        try {
-          sessionStorage.setItem("wa-float-dismissed", "true");
-        } catch (e) { /* ignore */ }
+  /* ---------- hero pointer parallax + spotlight ---------- */
+  const visual = document.querySelector('.hero__visual');
+  if (hero && visual && !reduce && window.matchMedia('(pointer: fine)').matches) {
+    let tx = 0, ty = 0, x = 0, y = 0, running = false;
+    const loop = () => {
+      x += (tx - x) * 0.08;
+      y += (ty - y) * 0.08;
+      visual.style.setProperty('--px', x.toFixed(3));
+      visual.style.setProperty('--py', y.toFixed(3));
+      if (Math.abs(tx - x) > 0.002 || Math.abs(ty - y) > 0.002) requestAnimationFrame(loop);
+      else running = false;
+    };
+    hero.addEventListener('pointermove', (e) => {
+      const r = visual.getBoundingClientRect();
+      tx = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width) * 2 - 1));
+      ty = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height) * 2 - 1));
+      const h = hero.getBoundingClientRect();
+      hero.style.setProperty('--mx', e.clientX - h.left + 'px');
+      hero.style.setProperty('--my', e.clientY - h.top + 'px');
+      if (!running) { running = true; requestAnimationFrame(loop); }
+    });
+    hero.addEventListener('pointerleave', () => {
+      tx = 0; ty = 0;
+      if (!running) { running = true; requestAnimationFrame(loop); }
+    });
+  }
+
+  /* ---------- service card spotlight ---------- */
+  if (!reduce) {
+    $$('.svc-card').forEach((card) => {
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', e.clientX - r.left + 'px');
+        card.style.setProperty('--my', e.clientY - r.top + 'px');
       });
-    }
+    });
   }
 })();
